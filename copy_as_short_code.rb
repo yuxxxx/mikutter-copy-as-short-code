@@ -29,5 +29,4 @@ Plugin.create(:copy_as_short_code) do
       option "center", "中央" 
     end
   end
-
 end
