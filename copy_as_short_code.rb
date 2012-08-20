@@ -10,15 +10,16 @@ Plugin.create(:copy_as_short_code) do
          condition: lambda{ |opt| true },
          visible: true,
          role: :timeline) do |opt|
-    message = opt.message
+    message = opt.messages.first
     screen_name = message.user[:idname]
-    Gtk::Clipboard.copy("[tweet http://twitter.com/#!/#{screen_name}/status/#{message.id} align='#{UserConfig[:copy_as_short_code_align]}' lang='ja']") end
+    Gtk::Clipboard.copy("[tweet http://twitter.com/#{screen_name}/status/#{message.id} #{UserConfig[:copy_as_short_code_align]}lang='ja']") end
   
-  settings("ショートコードでコピペ") do
+  settings("ショートコード") do
     select('配置', :copy_as_short_code_align) do
-      option "left", "左" 
-      option "right", "右" 
-      option "center", "中央" 
+      option "", "なし"
+      option "align='left' ", "左" 
+      option "align='right' ", "右" 
+      option "align='center' ", "中央" 
     end
   end
 end
